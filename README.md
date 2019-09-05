@@ -4,6 +4,8 @@ This script is for anyone who is looking to **move away from Microsoft OneNote t
 
 This script can convert hundreds of OnteNote HTML Pages (Exported via Azure's API using [this method](https://superuser.com/a/1449705)) to ZimWiki format for use with Zim Desktop. [Zim Desktop](https://zim-wiki.org/) is free, open-source, cross-platform Note Taking application.
 
+**One setting to configure:** you will need to update the _ONENOTE_EXPORT_FOLDER_ variable in the script so that it points to the directory that holds your exported Notebook from danmou's method.
+
 Credit to user [danmou](https://superuser.com/users/651502/danmou) on superuser.com who suggested a [working method](https://superuser.com/a/1449705) for extracting Microsoft OneNote Notebooks via Azure's API platform.
 
 The resulting HTML files you're left with are great in that they're more versatile and open than Microsoft's proprietary format, however they are still not ideal for Zim Desktop which does not allow you to import .html files.
