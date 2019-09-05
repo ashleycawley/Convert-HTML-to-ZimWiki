@@ -45,6 +45,9 @@ echo "" # Just creating a space from the last line
 # This stores script-name.sh inside the variable $SCRIPTNAME
 SCRIPTNAME=`basename "$0"`
 
+# Archive / Backup of original file set before processing
+tar -zcvf --exclude=pre-conversion-backup-`date +"%d-%m-%y_%T"`.tar.gz $ONENOTE_EXPORT_FOLDER/pre-conversion-backup-`date +"%d-%m-%y_%T"`.tar.gz $ONENOTE_EXPORT_FOLDER
+
 LVL1_FOLDER_NAMES=(`ls -1 $ONENOTE_EXPORT_FOLDER | grep -v $SCRIPTNAME`)
 
 for FOLDER_NAME in "${LVL1_FOLDER_NAMES[@]}"
