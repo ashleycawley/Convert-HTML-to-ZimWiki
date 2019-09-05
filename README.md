@@ -1,6 +1,6 @@
 # Convert-HTML-to-ZimWiki
 
-This script is for anyone who is looking to *move away from Microsoft OneNote to Zim Desktop*.
+This script is for anyone who is looking to **move away from Microsoft OneNote to Zim Desktop**.
 
 This script can convert hundreds of OnteNote HTML Pages (Exported via Azure's API using [this method](https://superuser.com/a/1449705)) to ZimWiki format for use with Zim Desktop. [Zim Desktop](https://zim-wiki.org/) is free, open-source, cross-platform Note Taking application.
 
