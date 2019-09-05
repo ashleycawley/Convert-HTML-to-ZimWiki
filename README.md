@@ -24,6 +24,7 @@ _Product Names, Terminology, Explanations_
 
 ## Exporting OneNote Notebooks from Azure API
 Source: Posted by [danmou](https://superuser.com/users/651502/danmou) on June 2019.
+
 I found a solution using Microsoft's Graph API. This means you don't even have to run OneNote, it just requires that your notes are synced to your Microsoft account and then you can get your notes as perfectly formatted HTML (which you can view in the browser or convert to whatever format you prefer using Pandoc).
 
 The magic happens in this Python script. It runs a simple local web server that you can use to log in to your Microsoft account and once you do that it downloads all your notes as HTML, plus images and attachments in their original formats, and stores them in file hierarchy preserving the original structure of your notebooks (including page order and subpages).
@@ -31,12 +32,19 @@ The magic happens in this Python script. It runs a simple local web server that 
 Before you can run the script, you have to register an "app" in Microsoft Azure so it can access the Graph API:
 
 Go to https://aad.portal.azure.com/ and log in with your Microsoft account.
+
 Select "Azure Active Directory" and then "App registrations" under "Manage".
+
 Select "New registration". Choose any name, set "Supported account types" to "Accounts in any organizational directory and personal Microsoft accounts" and under "Redirect URI", select Web and enter http://localhost:5000/getToken. Register.
+
 Copy the "Application (client) ID" and paste it as client_id in the beginning of the Python script.
+
 Select "Certificates & secrets" under "Manage". Press "New client secret", choose a name and confirm.
+
 Copy the client secret and paste it as secret in the Python script.
+
 Select "API permissions" under "Manage". Press "Add a permission", scroll down and select OneNote, choose "Delegated permissions" and check "Notes.Read" and "Notes.Read.All". Press "Add permissions".
+
 Then you need to install the Python dependencies. Make sure you have Python 3.7 (or newer) installed and install the dependencies using the command pip install flask msal requests_oauthlib.
 
 Now you can run the script. In a terminal, navigate to the directory where the script is located and run it using python onenote_export.py. This will start a local web server on port 5000.
