@@ -25,11 +25,9 @@ fi
 
 # A check to ensure the correct software is already installed
 declare -r U_CMDS="pandoc tar grep rsync find sed"
-
-# for loop goes round and checks whether each program is installed
 for the_command in $U_CMDS
-        do
-                type -P $the_command >> /dev/null && : || {
+do
+        type -P $the_command >> /dev/null && : || {
         echo -e "$the_command command was not found, please install it $the_command and then try using this script again." >&2
         exit 1
     }
