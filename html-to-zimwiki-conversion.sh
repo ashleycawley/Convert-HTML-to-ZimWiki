@@ -2,13 +2,20 @@
 
 # Author: Ashley Cawley // ash@ashleycawley.co.uk // @ashleycawley
 #
-# Description: This script is designed to be used in conjunction with the resulting files that you are left with from doing a
-# OneNote Noteboook Export performed via a the Microsoft Azure API. This script should be placed into the Notebook folder and executed.
-# It converts the HTML files and images into a zimwiki (Zim Desktop Wiki) compatible format#
+# Description: This script is designed to convert (OneNote) HTML files into a Zim Desktop format (ZimWiki).
+# Specifically this is designed for people trying to move away from OneNote to Zim Desktop - https://zim-wiki.org/
+#
+# Follow this guide: https://superuser.com/a/1449705 to export your OneNote Notebook as HTML files and then you can
+# use this script to convert those HTML files into a format compatible with Zim Desktop (ZimWiki Markup).
+#
+# This script backs-up your HTML files before doing its work. It fixes formatting/layout issues, moves & renames
+# files & folders into the correct hireachry, embeds document titles in articles, cleans up files afterwards and 
+# much more. I have commented code where I can to explain the process step by step.
 
 # OneNote Export Folder
-ONENOTE_EXPORT_FOLDER='/home/acawley/Notebooks/testing/cloudabove'
+ONENOTE_EXPORT_FOLDER='/home/acawley/Notebooks/testing/cloudabove' # Configure to point at your Exported OneNote Notebook
 
+# Tests to see if you are logged in as root, if you are it stops. (A standard user is prefered)
 if
 [ `whoami` == root ]
 then
@@ -16,7 +23,7 @@ then
 	exit 1
 fi
 
-# Checking that required programs are installed
+# A check to ensure the correct software is already installed
 declare -r U_CMDS="pandoc"
 
 # for loop goes round and checks whether each program is installed
