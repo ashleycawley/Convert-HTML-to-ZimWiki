@@ -24,7 +24,7 @@ then
 fi
 
 # A check to ensure the correct software is already installed
-declare -r U_CMDS="pandoc"
+declare -r U_CMDS="pandoc tar grep rsync find sed"
 
 # for loop goes round and checks whether each program is installed
 for the_command in $U_CMDS
