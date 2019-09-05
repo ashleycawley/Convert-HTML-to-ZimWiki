@@ -7,7 +7,7 @@
 # It converts the HTML files and images into a zimwiki (Zim Desktop Wiki) compatible format#
 
 # OneNote Export Folder
-ONENOTE_EXPORT_FOLDER='/home/acawley/OneNote Export/testing/cloudabove'
+ONENOTE_EXPORT_FOLDER='/home/acawley/Notebooks/testing/cloudabove'
 
 if
 [ `whoami` == root ]
@@ -61,9 +61,6 @@ do
 
 		STATUS=(`echo $?`)
 
-		# Inserts a title into the article itself
-		sed "3i====== $SECOND_FOLDER_SANITISED ======" "$FOLDER_NAME/$SECOND_FOLDER/$SECOND_FOLDER_SANITISED.html"
-
 		# Setting up communal image directory
 		mkdir -p $FOLDER_NAME/$SECOND_FOLDER/images/
 
@@ -92,6 +89,11 @@ do
 			# Converts the document from HTML to Zim Wiki Format
 			pandoc -s -r html "$FOLDER_NAME/$SECOND_FOLDER/$THIRD_LEVEL_FOLDER/$FILENAME_WITH_UNDERSCORES.html" -t zimwiki -o "$FOLDER_NAME/$SECOND_FOLDER/$FILENAME_WITH_UNDERSCORES.txt"
 
+			# Inserts a title into the article itself
+			#echo "sed -i "3i====== $SECOND_FOLDER_SANITISED ======" "$FOLDER_NAME/$SECOND_FOLDER/$FILENAME_WITH_UNDERSCORES.txt""
+			sed -i "3i====== $SECOND_FOLDER_SANITISED ======" "$FOLDER_NAME/$SECOND_FOLDER/$FILENAME_WITH_UNDERSCORES.txt" # &>/dev/null
+			#read -p "Pausing - Enter to continue" INPUT
+
 		fi
 
 		if [ $STATUS == 0 ]
@@ -105,6 +107,11 @@ do
 
 			# Converts the document from HTML to Zim Wiki Format
 			pandoc -s -r html "$FOLDER_NAME/$FILENAME_WITH_UNDERSCORES.html" -t zimwiki -o "$FOLDER_NAME/$FILENAME_WITH_UNDERSCORES.txt"
+
+			# Inserts a title into the article itself
+			#echo "sed -i "3i====== $SECOND_FOLDER_SANITISED ======" "$FOLDER_NAME/$FILENAME_WITH_UNDERSCORES.txt""
+			sed -i "3i====== $SECOND_FOLDER_SANITISED ======" "$FOLDER_NAME/$FILENAME_WITH_UNDERSCORES.txt" # &>/dev/null
+			#read -p "Pausing - Enter to continue" INPUT
 		fi
 	done
 
@@ -118,10 +125,18 @@ find $ONENOTE_EXPORT_FOLDER -name "* " -print0 | sort -rz | while read -d $'\0' 
 find $ONENOTE_EXPORT_FOLDER -name " *" -print0 | sort -rz | while read -d $'\0' f; do mv -v "$f" "$(dirname "$f")/$(basename "${f// /_}")"; done
 
 # Fix Broken Image Paths, the default syntax pandoc seems to be inserting for zimwiki format doesn't seem to be working, so I'm replacing it with working syntax
-IMAGE_PATHS=(`grep -ril "{{:images" $ONENOTE_EXPORT_FOLDER/*/`)
+IMAGE_PATHS=(`grep -ril "{{:images" $ONENOTE_EXPORT_FOLDER/ | grep -v "$SCRIPTNAME"`)
 for IMAGE in "${IMAGE_PATHS[@]}"
 do
 	sed -i s,{{:images,{{../\images,g $IMAGE
+done
+
+FILE_LIST=(`find $ONENOTE_EXPORT_FOLDER -type f -name "*.txt"`)
+
+# Replaces doubled-up (two newlines) for just one, which makes the layout more sensible in Zim
+for FILE in "${FILE_LIST[@]}"
+do
+	sed -i '/^$/N;/^\n$/D' $FILE
 done
 
 # Deletes empty folders after things have been moved around
