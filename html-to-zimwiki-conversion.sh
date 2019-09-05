@@ -145,6 +145,9 @@ done
 # Deletes empty folders after things have been moved around
 find $ONENOTE_EXPORT_FOLDER -type d -empty -delete
 
+# Deletes OneNote HTML files which are no longer needed (they've already been backed up toward the top of this script)
+find $ONENOTE_EXPORT_FOLDER -type f -name "*.html" -delete
+
 # Resets $IFS this changes the delimiter that arrays use from new lines (\n) back to just spaces (which is what it normally is)
 IFS=$SAVEIFS
 
