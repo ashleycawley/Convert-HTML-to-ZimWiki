@@ -53,8 +53,10 @@ SCRIPTNAME=`basename "$0"`
 # Archive / Backup of original file set before processing
 tar --exclude="$ONENOTE_EXPORT_FOLDER/pre-conversion-backup-`date +"%d-%m-%y_%T"`.tar.gz" -zcvf $ONENOTE_EXPORT_FOLDER/pre-conversion-backup-`date +"%d-%m-%y_%T"`.tar.gz $ONENOTE_EXPORT_FOLDER
 
+# Gathers list of top level folder names whilst excluding this script from the list
 LVL1_FOLDER_NAMES=(`ls -1 $ONENOTE_EXPORT_FOLDER | grep -v $SCRIPTNAME`)
 
+# Main for loop which iterates through all of the various folders to do the work
 for FOLDER_NAME in "${LVL1_FOLDER_NAMES[@]}"
 do
 	SECOND_LVL_FOLDERS=(`ls -1 $FOLDER_NAME`)
