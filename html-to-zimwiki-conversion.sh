@@ -44,7 +44,6 @@ echo "" # Just creating a space from the last line
 
 # This stores script-name.sh inside the variable $SCRIPTNAME
 SCRIPTNAME=`basename "$0"`
-#echo "Script Name is: $SCRIPTNAME"
 
 LVL1_FOLDER_NAMES=(`ls -1 $ONENOTE_EXPORT_FOLDER | grep -v $SCRIPTNAME`)
 
@@ -61,6 +60,9 @@ do
 		mv "$FOLDER_NAME/$SECOND_FOLDER/main.html" "$FOLDER_NAME/$SECOND_FOLDER/$SECOND_FOLDER_SANITISED.html" &>/dev/null
 
 		STATUS=(`echo $?`)
+
+		# Inserts a title into the article itself
+		sed "3i====== $SECOND_FOLDER_SANITISED ======" "$FOLDER_NAME/$SECOND_FOLDER/$SECOND_FOLDER_SANITISED.html"
 
 		# Setting up communal image directory
 		mkdir -p $FOLDER_NAME/$SECOND_FOLDER/images/
