@@ -26,8 +26,8 @@ _Product Names, Terminology, Explanations_
 
 ## Potential Known Issues
 - Articles not converted:
--- Linux Search / Find Commands useful to Free Up Disk Space)
-Possibly due to strange titles and filenames containing forward slash and or closing brackets.
+
+_Linux Search / Find Commands useful to Free Up Disk Space)_ - Possibly due to strange titles and filenames containing forward slash and or closing brackets.
 
 ## Exporting OneNote Notebooks from Azure API
 Source: Posted by [danmou](https://superuser.com/users/651502/danmou) on June 2019.
