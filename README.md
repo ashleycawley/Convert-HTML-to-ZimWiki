@@ -18,11 +18,13 @@ For the sake of completeness I will list *_danmou's_ guide at the bottom of this
 
 ## Development Notes
 Things to do next:
+- Some HTML formatting (like bold) is not being transfered in the conversion, see if this can be.
+- Investigate potential problems with comma's in article names, one that potentially ran into issues:
+_Product Names, Terminology, Explanations_
 - ~Take the document title and insert that as a title within the .txt document.~
 - ~Backup original fileset before processing.~
 - ~Handle the archiving / removal of the old HTML files which are no longer required.~
-- Investigate potential problems with comma's in article names, one that potentially ran into issues:
-_Product Names, Terminology, Explanations_
+
 
 ## Potential Known Issues
 - Articles not converted:
