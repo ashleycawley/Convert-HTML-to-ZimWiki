@@ -13,7 +13,7 @@
 # much more. I have commented code where I can to explain the process step by step.
 
 # OneNote Export Folder
-ONENOTE_EXPORT_FOLDER='/home/acawley/Notebooks/testing/cloudabove' # Configure to point at your Exported OneNote Notebook
+ONENOTE_EXPORT_FOLDER='/home/acawley/onenote/testing/cloudabove' # Configure to point at your Exported OneNote Notebook
 
 # Tests to see if you are logged in as root, if you are it stops. (A standard user is prefered)
 if
@@ -53,7 +53,16 @@ SCRIPTNAME=`basename "$0"`
 # Archive / Backup of original file set before processing
 tar --exclude="$ONENOTE_EXPORT_FOLDER/pre-conversion-backup-`date +"%d-%m-%y_%T"`.tar.gz" -zcvf $ONENOTE_EXPORT_FOLDER/pre-conversion-backup-`date +"%d-%m-%y_%T"`.tar.gz $ONENOTE_EXPORT_FOLDER
 
-# Gathers list of top level folder names whilst excluding this script from the list
+# Gathers a list of all HTML files
+ALL_HTML_FILES=(`find "$ONENOTE_EXPORT_FOLDER" -type f -name "*.html"`)
+
+# Fixes the crappy Microsoft Bold Syntax for one that pandoc can later convert to zimwiki
+for HTML_FILE in "${ALL_HTML_FILES[@]}"
+do
+	sed -i -E 's,<span style="font-weight:bold">(.*)</span>,<strong>\1</strong>,g' $HTML_FILE
+done
+
+# Gathers a list of top level folder names whilst excluding this script from the list
 LVL1_FOLDER_NAMES=(`ls -1 $ONENOTE_EXPORT_FOLDER | grep -v $SCRIPTNAME`)
 
 # Main for loop which iterates through all of the various folders to do the work
